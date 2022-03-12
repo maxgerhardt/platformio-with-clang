@@ -240,6 +240,7 @@
                 "-mthumb",
                 "-mcpu=cortex-m0plus",
                 "-mno-unaligned-access",
+                "--config=armv6m_soft_nofp_nosys",
                 ""
             ]
         }
