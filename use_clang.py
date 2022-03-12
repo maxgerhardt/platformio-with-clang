@@ -32,6 +32,9 @@ for e in [env, projenv]:
     filtered3 = [x for x in e["RANLIBFLAGS"] if x != "-s"]
     e.Replace(RANLIBFLAGS = filtered3)
 
+    filtered4 = [x for x in e["ASFLAGS"] if not x in ["-nostdlib", "--specs=nano.specs", "-fsingle-precision-constant"]]
+    e.Replace(ASFLAGS = filtered4)
+
     # add to path.. somehow PlatformIO does not do this although it's the toolchain package.
     pkg = platform.get_package("toolchain-clang")
     e.PrependENVPath(
