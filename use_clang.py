@@ -28,6 +28,10 @@ for e in [env, projenv]:
     filtered2 = [x for x in e["LINKFLAGS"] if not x in ["-Wl,--gc-sections,--relax", "--specs=nano.specs"]]
     e.Replace(LINKFLAGS = filtered2)
 
+    # -s option not available for llvm-ranlib
+    filtered3 = [x for x in e["RANLIBFLAGS"] if x != "-s"]
+    e.Replace(RANLIBFLAGS = filtered3)
+
     # add to path.. somehow PlatformIO does not do this although it's the toolchain package.
     pkg = platform.get_package("toolchain-clang")
     e.PrependENVPath(
