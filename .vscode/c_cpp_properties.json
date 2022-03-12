@@ -235,7 +235,7 @@
                 ""
             ],
             "cppStandard": "c++14",
-            "compilerPath": "clang",
+            "compilerPath": "C:/Users/Max/.platformio/packages/toolchain-clang/bin/clang.exe",
             "compilerArgs": [
                 "-mthumb",
                 "-mcpu=cortex-m0plus",
