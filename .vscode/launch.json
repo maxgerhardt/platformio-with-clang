@@ -1,0 +1,47 @@
+// AUTOMATICALLY GENERATED FILE. PLEASE DO NOT MODIFY IT MANUALLY
+//
+// PIO Unified Debugger
+//
+// Documentation: https://docs.platformio.org/page/plus/debugging.html
+// Configuration: https://docs.platformio.org/page/projectconf/section_env_debug.html
+
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "platformio-debug",
+            "request": "launch",
+            "name": "PIO Debug",
+            "executable": "c:/Users/Max/temp/teensylc_clang/.pio/build/teensylc_clang/firmware.elf",
+            "projectEnvName": "teensylc_clang",
+            "toolchainBinDir": "C:/Users/Max/.platformio/packages/toolchain-gccarmnoneeabi@1.50401.190816/bin",
+            "internalConsoleOptions": "openOnSessionStart",
+            "svdPath": "C:/Users/Max/.platformio/platforms/teensy/misc/svd/MKL26Z4.svd",
+            "preLaunchTask": {
+                "type": "PlatformIO",
+                "task": "Pre-Debug (teensylc_clang)"
+            }
+        },
+        {
+            "type": "platformio-debug",
+            "request": "launch",
+            "name": "PIO Debug (skip Pre-Debug)",
+            "executable": "c:/Users/Max/temp/teensylc_clang/.pio/build/teensylc_clang/firmware.elf",
+            "projectEnvName": "teensylc_clang",
+            "toolchainBinDir": "C:/Users/Max/.platformio/packages/toolchain-gccarmnoneeabi@1.50401.190816/bin",
+            "internalConsoleOptions": "openOnSessionStart",
+            "svdPath": "C:/Users/Max/.platformio/platforms/teensy/misc/svd/MKL26Z4.svd"
+        },
+        {
+            "type": "platformio-debug",
+            "request": "launch",
+            "name": "PIO Debug (without uploading)",
+            "executable": "c:/Users/Max/temp/teensylc_clang/.pio/build/teensylc_clang/firmware.elf",
+            "projectEnvName": "teensylc_clang",
+            "toolchainBinDir": "C:/Users/Max/.platformio/packages/toolchain-gccarmnoneeabi@1.50401.190816/bin",
+            "internalConsoleOptions": "openOnSessionStart",
+            "svdPath": "C:/Users/Max/.platformio/platforms/teensy/misc/svd/MKL26Z4.svd",
+            "loadMode": "manual"
+        }
+    ]
+}
