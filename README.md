@@ -29,6 +29,48 @@ Feel free to tell my how to use the official LLVM release with a Cortex-M0+ targ
 
 This is a peculiar bug in the provided toolchain verison, also reported [here](https://github.com/msys2/MINGW-packages/issues/5231) and [here](https://github.com/msys2/MINGW-packages/issues/61269). The compiled package seems to have some problems with thread notifications and so the linking step appears to hang. **The solution** is to wait a bit (~5 seconds), open the task manager, find the `clang++.exe` process that hangs, kill it, then press the build button in VSCode again, choose "Terminate task", then press the build button yet again. The second linking step should go through most of the time and produce the `firmware.elf`.
 
+## Build errors on Ubuntu 20.04 LTS
+
+```
+clang++: error while loading shared libraries: libtinfo.so.5: cannot open shared object file: No such file or directory
+```
+Recent Ubuntus ship libtinfo6, but clang still depends on libtinfo5 so you may want to install it:
+```
+> ldd bin/clang++
+        [...]
+        libz.so.1 => /lib/x86_64-linux-gnu/libz.so.1 (0x00007f9c763a9000)
+        libtinfo.so.5 => not found
+        libstdc++.so.6 => /lib/x86_64-linux-gnu/libstdc++.so.6 (0x00007f9c761c5000)
+        [...]
+> sudo apt install libtinfo5
+> ldd bin/clang++
+        [...]
+        libz.so.1 => /lib/x86_64-linux-gnu/libz.so.1 (0x00007fa3a8148000)
+        libtinfo.so.5 => /lib/x86_64-linux-gnu/libtinfo.so.5 (0x00007fa3a8118000)
+        libstdc++.so.6 => /lib/x86_64-linux-gnu/libstdc++.so.6 (0x00007fa3a7f36000)
+        [...]
+```
+
+## Build warnings on Ubuntu 20.04 LTS
+
+Right now a few warnings are popping up with default build settings. You may use build flags like `-Wno-unused-variable` to silence them temporarily, but in general **it's not** recommended (especially for `-Wincompatible-pointer-types` and `-Wcompare-distinct-pointer-types`).
+
+```
+/home/ez/.platformio/packages/framework-arduinoteensy/cores/teensy3/mk20dx128.c:693:12: warning: incompatible pointer types initializing 'uint32_t *' (aka 'unsigned int *') with an expression of type 'unsigned long *' [-Wincompatible-pointer-types]
+        uint32_t *src = &_etext;
+                  ^     ~~~~~~~
+/home/ez/.platformio/packages/framework-arduinoteensy/cores/teensy3/mk20dx128.c:694:12: warning: incompatible pointer types initializing 'uint32_t *' (aka 'unsigned int *') with an expression of type 'unsigned long *' [-Wincompatible-pointer-types]
+        uint32_t *dest = &_sdata;
+                  ^      ~~~~~~~
+/home/ez/.platformio/packages/framework-arduinoteensy/cores/teensy3/mk20dx128.c:770:14: warning: comparison of distinct pointer types ('uint32_t *' (aka 'unsigned int *') and 'unsigned long *') [-Wcompare-distinct-pointer-types]
+        while (dest < &_edata) *dest++ = *src++;
+               ~~~~ ^ ~~~~~~~
+/home/ez/.platformio/packages/framework-arduinoteensy/cores/teensy3/mk20dx128.c:1267:20: warning: unused variable 'faultmask' [-Wunused-variable]
+        uint32_t primask, faultmask, basepri, ipsr;
+                          ^
+```
+
+
 ## I get VSCode IntelliSense errors in the Clang configuration
 
 In your `.vscode/c_cpp_properties.json`, you have
