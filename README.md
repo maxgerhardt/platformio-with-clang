@@ -27,7 +27,7 @@ Feel free to tell my how to use the official LLVM release with a Cortex-M0+ targ
 
 ## Linking hangs on Windows
 
-This is a peculiar bug in the provided toolchain verison, also reported [here](https://github.com/msys2/MINGW-packages/issues/5231) and [here](https://github.com/msys2/MINGW-packages/issues/61269). The compiled package seems to have some problems with thread notifications and so the linking step appears to hang. **The solution** is to wait a bit (~5 seconds), open the task manager, find the `clang++.exe` process that hangs, kill it, then press the build button in VSCode again, choose "Terminate task", then press the build button yet again. The second linking step should go through most of the time and produce the `firmware.elf`.
+This is a peculiar bug in the provided toolchain verison, also reported [here](https://github.com/msys2/MINGW-packages/issues/5231) and [here](https://github.com/msys2/MINGW-packages/issues/6126). The compiled package seems to have some problems with thread notifications and so the linking step appears to hang. **The solution** is to wait a bit (~5 seconds), open the task manager, find the `clang++.exe` process that hangs, kill it, then press the build button in VSCode again, choose "Terminate task", then press the build button yet again. The second linking step should go through most of the time and produce the `firmware.elf`.
 
 ## Build errors on Ubuntu 20.04 LTS
 
